@@ -48,9 +48,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public void edit(Long id, User u) {
-        u.setPassword(passwordEncoder.encode(u.getPassword()));
-        userRepository.saveAndFlush(u);
+    public void edit(Long id, User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.saveAndFlush(user);
 
     }
 

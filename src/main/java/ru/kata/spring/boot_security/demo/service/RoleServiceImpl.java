@@ -7,7 +7,9 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.repository.RoleRepository;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @Service
@@ -23,27 +25,27 @@ public class RoleServiceImpl implements RoleService{
 
     @Override
     @Transactional
-    public Role addRole(Role role) {
+    public Role saveRole(Role role) {
         return roleRepository.save(role);
     }
 
     @Override
-    public Role getRoleByRoleName(String role) {
+    public Role getRoleByName(String role) {
         return roleRepository.getRoleByRoleName(role);
     }
 
     @Override
-    public List<Role> getListOfRoles(String[] roleNames) {
-        List<Role> roleList = new ArrayList<>();
+    public Set<Role> getSetOfRoles(String[] roleNames) {
+        Set<Role> roleSet = new HashSet<>();
         for(String role : roleNames){
-            roleList.add(getRoleByRoleName(role));
+            roleSet.add(getRoleByName(role));
         }
-        return roleList;
+        return roleSet;
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<Role> getAllRoles() {
-        return roleRepository.findAll();
+        return  roleRepository.findAll();
     }
 }

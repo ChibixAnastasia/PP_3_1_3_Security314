@@ -7,9 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.persistence.Table;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 
 @Entity
@@ -37,14 +35,14 @@ public class User implements UserDetails {
             name = "usersroles"
             , joinColumns = @JoinColumn(name = "userid")
             , inverseJoinColumns = @JoinColumn(name = "roleid"))
-    private List<Role> roles = new ArrayList<>();
+    private Set<Role> roles = new HashSet<>();
 
 
     public User() {
         roles.size();
     }
 
-    public User(long id, String name, int age, String email, String password, List<Role> roles) {
+    public User(long id, String name, int age, String email, String password, Set<Role> roles) {
         this.id = id;
         this.name = name;
         this.age = age;
@@ -95,7 +93,7 @@ public class User implements UserDetails {
         return name;
     }
 
-    public List<Role> getRoles() {
+    public Set<Role> getRoles() {
         return this.roles;
     }
 
@@ -119,7 +117,7 @@ public class User implements UserDetails {
         this.email = email;
     }
 
-    public void setRoles(List<Role> roles) {
+    public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
 

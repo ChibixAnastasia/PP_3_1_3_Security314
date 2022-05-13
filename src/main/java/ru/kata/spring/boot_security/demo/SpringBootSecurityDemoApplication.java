@@ -13,9 +13,7 @@ import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 
@@ -38,15 +36,15 @@ public class SpringBootSecurityDemoApplication extends SpringBootServletInitiali
 
     @Override
     public void run(String... args) throws Exception {
-        roleService.addRole(new Role(1L,"ADMIN"));
-        roleService.addRole(new Role(2L,"USER"));
+        roleService.saveRole(new Role(1L,"ADMIN"));
+        roleService.saveRole(new Role(2L,"USER"));
 
-        List<Role> role = new ArrayList<>();
-        role.add(roleService.getRoleByRoleName("ADMIN"));
-        role.add(roleService.getRoleByRoleName("USER"));
+        Set<Role> role = new HashSet<>();
+        role.add(roleService.getRoleByName("ADMIN"));
+        role.add(roleService.getRoleByName("USER"));
 
-        List<Role> roleUser = new ArrayList<>();
-        roleUser.add(roleService.getRoleByRoleName("USER"));
+        Set<Role> roleUser = new HashSet<>();
+        roleUser.add(roleService.getRoleByName("USER"));
 
         User admin = new User( 1L,"admin" ,23,  "admin@mail.ru", "admin", role);
 
